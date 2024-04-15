@@ -7,13 +7,6 @@ pipeline{
     }
 
     stages{
-        stage('Build'){
-            steps{
-                sh 'mvn --version'
-                sh 'mvn clean package'
-               // sh 'mvn clean package'
-            }
-        }
         stage('Code Quality'){
             steps{
                 sh 'echo sonarqube Code Quality check done'
@@ -29,6 +22,14 @@ pipeline{
                 sh 'echo Selenium Automated Tests done'
             }
         }
+        stage('Build'){
+            steps{
+                sh 'mvn --version'
+                sh 'mvn clean package'
+               // sh 'mvn clean package'
+            }
+        }
+
         stage('Image Creation'){
             steps{
                 sh 'echo Image created'

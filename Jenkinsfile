@@ -2,12 +2,16 @@ pipeline{
 
     agent any
 
+    tools{
+        maven "maven-3.9.6"
+    }
+
     stages{
         stage('Build'){
             steps{
                 sh 'mvn --version'
                 sh 'mvn clean install'
-               // sh 'mvn build app'
+               // sh 'mvn clean package'
             }
         }
         stage('Code Quality'){

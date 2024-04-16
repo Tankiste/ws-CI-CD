@@ -39,9 +39,14 @@ pipeline{
 
         stage('Image Creation'){
             steps{
-                sh 'docker ps -a'
-                sh 'docker build -t tankiste/ws-cicd:1.${BUILD_NUMBER} . '
-                sh 'docker build -t tankiste/ws-cicd:latest . '
+                script{
+                    withDockerRegistry(credentialsId: 'DOCKER_ID'){
+                        sh 'docker ps -a'
+                        sh 'docker build -t tankiste/ws-cicd:1.${BUILD_NUMBER} . '
+                        sh 'docker build -t tankiste/ws-cicd:latest . '
+                    }
+                }
+                
             }
         }
         stage('Deployment on DockerHub'){

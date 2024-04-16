@@ -32,8 +32,8 @@ pipeline{
 
         stage('Image Creation'){
             steps{
-                sh 'docker build -t tankiste/ws-CICD:1.${BUILD_NUMBER} . '
-                sh 'docker build -t tankiste/ws-CICD:latest . '
+                sh 'docker build -t tankiste/ws-cicd:1.${BUILD_NUMBER} . '
+                sh 'docker build -t tankiste/ws-cicd:latest . '
             }
         }
         stage('Deployment on DockerHub'){
@@ -41,8 +41,8 @@ pipeline{
                 withCredentials([usernamePassword(credentialsId: 'DOCKER_ID', passwordVariable: 'DOCKER_PWD', usernameVariable: 'DOCKER_USERNAME')]){
                     sh 'docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PWD}'
                 }
-                sh 'docker push tankiste/ws-CICD:1.${BUILD_NUMBER}'
-                sh 'docker push tankiste/ws-CICD:latest'
+                sh 'docker push tankiste/ws-cicd:1.${BUILD_NUMBER}'
+                sh 'docker push tankiste/ws-cicd:latest'
             }
         }
         stage('Email Notification'){

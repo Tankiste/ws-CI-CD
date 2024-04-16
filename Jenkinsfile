@@ -30,6 +30,11 @@ pipeline{
             }
         }
 
+        stage('Initialize'){
+            def dockerHome = tool 'myDocker'
+            env.PATH = "${dockerHome}/bin:${env.PATH}"
+        }
+
         stage('Image Creation'){
             steps{
                 sh 'docker build -t tankiste/ws-cicd:1.${BUILD_NUMBER} . '

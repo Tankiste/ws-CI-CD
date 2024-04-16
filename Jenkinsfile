@@ -39,6 +39,7 @@ pipeline{
 
         stage('Image Creation'){
             steps{
+                sh 'docker ps -a'
                 sh 'docker build -t tankiste/ws-cicd:1.${BUILD_NUMBER} . '
                 sh 'docker build -t tankiste/ws-cicd:latest . '
             }

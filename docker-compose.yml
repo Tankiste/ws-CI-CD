@@ -8,6 +8,9 @@ services:
       - "50000:50000"
     volumes:
       - ./jenkins_home:/var/jenkins_home
+      - C:/Program Files/Docker/Docker/resources/bin/docker:/usr/bin/docker
+      # - C:/Program Files/Docker/Docker:/Docker/Docker
+      - C:/Users/JORDAN/.docker/daemon.json:/etc/docker/daemon.json
     container_name: jenkins
     networks:
       - jenkins

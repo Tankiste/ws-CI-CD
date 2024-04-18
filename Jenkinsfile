@@ -42,8 +42,8 @@ pipeline{
                 script{
                     withDockerRegistry(credentialsId: 'DOCKER_ID'){
                         //sh 'docker ps -a'
-                        sh "docker build -t tankiste/wscicd:1.${BUILD_NUMBER} . "
-                        sh "docker build -t tankiste/wscicd:latest . "
+                        sh "docker build -t tankiste/ws-CICD-1.0-SNAPSHOT:1.${BUILD_NUMBER} . "
+                        sh "docker build -t tankiste/ws-CICD-1.0-SNAPSHOT:latest . "
                     }
                 }
                 
@@ -54,8 +54,8 @@ pipeline{
                 withCredentials([usernamePassword(credentialsId: 'DOCKER_ID', passwordVariable: 'DOCKER_PWD', usernameVariable: 'DOCKER_USERNAME')]){
                     sh 'docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PWD}'
                 }
-                sh 'docker push tankiste/wscicd:1.${BUILD_NUMBER}'
-                sh 'docker push tankiste/wscicd:latest'
+                sh 'docker push tankiste/ws-CICD-1.0-SNAPSHOT:1.${BUILD_NUMBER}'
+                sh 'docker push tankiste/ws-CICD-1.0-SNAPSHOT:latest'
             }
         }
         stage('Email Notification'){

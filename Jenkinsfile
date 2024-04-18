@@ -42,8 +42,8 @@ pipeline{
             //     script{
             //         withDockerRegistry(credentialsId: 'DOCKER_ID'){
                         //sh 'docker ps -a'
-                        sh "sudo docker build -t tankiste/ws-CICD-1.0-SNAPSHOT:1.${BUILD_NUMBER} . "
-                        sh "sudo docker build -t tankiste/ws-CICD-1.0-SNAPSHOT:latest . "
+                        sh "docker build -t tankiste/ws-CICD-1.0-SNAPSHOT:1.${BUILD_NUMBER} . "
+                        sh "docker build -t tankiste/ws-CICD-1.0-SNAPSHOT:latest . "
                 //     }
                 // }
                 

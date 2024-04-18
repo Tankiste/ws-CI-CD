@@ -5,7 +5,7 @@
 
 FROM openjdk:11
 
-COPY target/*.jar ws-CICD-1.0-SNAPSHOT.jar
+ADD target/*.jar ws-CICD-1.0-SNAPSHOT.jar
 
 ENTRYPOINT [ "java", "-jar", "ws-CICD-1.0-SNAPSHOT.jar" ]
 

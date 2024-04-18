@@ -42,22 +42,22 @@ pipeline{
                 script{
                     withDockerRegistry(credentialsId: 'DOCKER_ID'){
                         //sh 'docker ps -a'
-                        sh "docker build -t tankiste/ws-CICD-1.0-SNAPSHOT:1.${BUILD_NUMBER} . "
-                        sh "docker build -t tankiste/ws-CICD-1.0-SNAPSHOT:latest . "
+                        sh "sudo docker build -t tankiste/ws-CICD-1.0-SNAPSHOT:1.${BUILD_NUMBER} . "
+                        sh "sudo docker build -t tankiste/ws-CICD-1.0-SNAPSHOT:latest . "
                     }
                 }
                 
             }
         }
-        stage('Deployment on DockerHub'){
-            steps{
-                withCredentials([usernamePassword(credentialsId: 'DOCKER_ID', passwordVariable: 'DOCKER_PWD', usernameVariable: 'DOCKER_USERNAME')]){
-                    sh 'docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PWD}'
-                }
-                sh 'docker push tankiste/ws-CICD-1.0-SNAPSHOT:1.${BUILD_NUMBER}'
-                sh 'docker push tankiste/ws-CICD-1.0-SNAPSHOT:latest'
-            }
-        }
+        // stage('Deployment on DockerHub'){
+        //     steps{
+        //         withCredentials([usernamePassword(credentialsId: 'DOCKER_ID', passwordVariable: 'DOCKER_PWD', usernameVariable: 'DOCKER_USERNAME')]){
+        //             sh 'docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PWD}'
+        //         }
+        //         sh 'docker push tankiste/ws-CICD-1.0-SNAPSHOT:1.${BUILD_NUMBER}'
+        //         sh 'docker push tankiste/ws-CICD-1.0-SNAPSHOT:latest'
+        //     }
+        // }
         stage('Email Notification'){
             steps{
                 sh 'echo Email send'
